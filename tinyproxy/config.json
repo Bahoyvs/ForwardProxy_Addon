@@ -2,7 +2,7 @@
     "name": "Tinyproxy Forward Proxy",
     "version": "1.0.0",
     "slug": "tinyproxy",
-    "description": "A custom forward proxy add-on for Home Assistant OS using Tinyproxy",
+    "description": "A custom forward proxy add-on using Tinyproxy for Home Assistant OS",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "startup": "services",
     "boot": "auto",
@@ -10,15 +10,15 @@
       "8888/tcp": 8888
     },
     "options": {
-      "port": 8888,
-      "allow_networks": [
-        "192.168.0.0/16"
-      ]
+      "port": 8888
     },
     "schema": {
-      "port": "int",
-      "allow_networks": ["list"]
+      "port": "int"
     },
-    "image": "bitnami/tinyproxy:latest"
+    "image": "bitnami/tinyproxy:latest",
+    "environment": {
+      "TINYPROXY_PORT_NUMBER": "8888",
+      "TINYPROXY_ALLOW": "192.168.0.0/16"
+    }
   }
   
