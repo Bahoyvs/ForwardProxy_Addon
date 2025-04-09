@@ -1,24 +1,38 @@
 {
-    "name": "Tinyproxy Forward Proxy",
-    "version": "1.0.0",
-    "slug": "tinyproxy",
-    "description": "A custom forward proxy add-on using Tinyproxy for Home Assistant OS",
-    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-    "startup": "services",
-    "boot": "auto",
-    "ports": {
-      "8888/tcp": 8888
-    },
-    "options": {
-      "port": 8888
-    },
-    "schema": {
-      "port": "int"
-    },
-    "image": "bitnami/tinyproxy:latest",
-    "environment": {
-      "TINYPROXY_PORT_NUMBER": "8888",
-      "TINYPROXY_ALLOW": "192.168.0.0/16"
-    }
+  "name": "Tinyproxy Forward Proxy",
+  "version": "1.0.0",
+  "slug": "tinyproxy_docker",
+  "description": "A custom forward proxy add-on using Tinyproxy, built with a custom Dockerfile",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "ports": {
+    "8888/tcp": 8888
+  },
+  "options": {
+    "port": 8888,
+    "allow_networks": [
+      "192.168.0.0/16"
+    ]
+  },
+  "schema": {
+    "port": "int",
+    "allow_networks": [
+      "list"
+    ]
+  },
+  "image": "local/tinyproxy_docker-{arch}",
+  "build_from": {
+    "aarch64": "ghcr.io/hassio-addons/base/aarch64:11.0.0",
+    "amd64": "ghcr.io/hassio-addons/base/amd64:11.0.0",
+    "armhf": "ghcr.io/hassio-addons/base/armhf:11.0.0",
+    "armv7": "ghcr.io/hassio-addons/base/armv7:11.0.0",
+    "i386": "ghcr.io/hassio-addons/base/i386:11.0.0"
   }
-  
+}
